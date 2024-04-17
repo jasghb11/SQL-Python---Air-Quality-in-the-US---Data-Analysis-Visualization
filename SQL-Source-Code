@@ -1,0 +1,201 @@
+select """state""", """Good Days""", """moderate days""", """Unhealthy for Sensitive Groups Days""", """Unhealthy Days""", """very unhealthy days""", """Hazardous Days""" from annual_aqi_by_county_2023;
+
+-- Calculating the total number of moderate, unhealthy, very unhealthy days for different regions of the US
+
+select 
+SUM(["Good Days"]) AS total_good_days_us,
+SUM(["Moderate Days"]) AS total_moderate_days_us,
+SUM(["Unhealthy for Sensitive Groups Days"]) AS total_unhealthy_sensitive_US,
+SUM(["Unhealthy Days"]) AS total_unhealthy_days_US,
+SUM(["Very Unhealthy Days"]) AS total_very_unhealthy_US,
+SUM(["Hazardous Days"]) AS total_hazardous_US
+from annual_aqi_by_county_2023
+
+/* West Coast
+Washington, Oregon, California, Hawaii
+*/
+
+select 
+SUM(["Good Days"]) AS total_good_days_west_coast,
+SUM((["Good Days"]) / 139401) * 100 AS total_good_days_west_coast,
+SUM(["Moderate Days"]) AS total_moderate_west_coast,
+SUM((["Moderate Days"]) / 41264) * 100 AS percent_moderate_days,
+SUM(["Unhealthy for Sensitive Groups Days"]) AS total_unhealthy_sensitive_groups_west_coast,
+SUM((["Unhealthy for Sensitive Groups Days"]) / 3361) * 100 AS percent_unhealthy_sensitive_days,
+SUM(["Unhealthy Days"]) AS total_unhealthy_west_coast,
+SUM((["Unhealthy Days"]) / 790) * 100 AS percent_unhealthy_days,
+SUM(["Very Unhealthy Days"]) AS total_very_unhealthy_westcoast,
+SUM((["Very Unhealthy Days"]) /88) * 100 AS percent_very_unhealthy,
+SUM(["Hazardous Days"]) AS total_hazardous_west_coast,
+SUM((["Hazardous Days"]) / 48) * 100 AS percent_hazardous_west_coast
+from annual_aqi_by_county_2023
+WHERE ["State"] = '"Washington"' OR ["State"] = '"Oregon"' OR ["State"] = '"California"' OR 
+["State"] = '"Hawaii"';
+
+/* Mountain West
+Montana, Idaho, Utah, Nevada, Colorado
+*/
+
+select 
+SUM(["Good Days"]) AS total_good_days_mountain_west,
+SUM((["Good Days"]) / 139401) * 100 AS total_good_days_mountain_west,
+SUM(["Moderate Days"]) AS total_moderate_mountain_west,
+SUM((["Moderate Days"]) / 41264) * 100 AS percent_moderate_mountain_west,
+SUM(["Unhealthy for Sensitive Groups Days"]) AS total_unhealthy_sensitive_mountain_west,
+SUM((["Unhealthy for Sensitive Groups Days"]) / 3361) * 100 AS percent_unhealthy_sensitive_mountain_west,
+SUM(["Unhealthy Days"]) AS total_unhealthy_mountain_west,
+SUM((["Unhealthy Days"]) / 790) * 100 AS percent_unhealthy_mountain_west,
+SUM(["Very Unhealthy Days"]) AS total_very_unhealthy_mountain_west,
+SUM((["Very Unhealthy Days"]) / 88) * 100 AS percent_very_unhealthy_mountain_west,
+SUM(["Hazardous Days"]) AS total_hazardous_mountain_west,
+SUM((["Hazardous Days"]) / 48) * 100 AS percent_hazardous_mountain_west
+from annual_aqi_by_county_2023
+WHERE ["State"] = '"Montana"' OR ["State"] = '"Utah"' OR ["State"] = '"Idaho"' OR 
+["State"] = '"Nevada"' or ["State"] = '"Colorado"' or ["State"] = '"Wyoming"';
+
+/* Southwest
+Arizona, New Mexico, Texas
+*/
+
+select 
+SUM(["Good Days"]) AS total_good_days_southwest,
+SUM((["Good Days"]) / 139401) * 100 AS total_good_days_southwest,
+SUM(["Moderate Days"]) AS total_moderate_southwest,
+SUM((["Moderate Days"]) / 41264) * 100 AS percent_moderate_southwest,
+SUM(["Unhealthy for Sensitive Groups Days"]) AS total_unhealthy_sensitive_southwest,
+SUM((["Unhealthy for Sensitive Groups Days"]) / 3361) * 100 AS percent_unhealthy_sensitive_southwest,
+SUM(["Unhealthy Days"]) AS total_unhealthy_southwest,
+SUM((["Unhealthy Days"]) / 790) * 100 AS percent_unhealthy_southwest,
+SUM(["Very Unhealthy Days"]) AS total_very_unhealthy_southwest,
+SUM((["Very Unhealthy Days"]) / 88) * 100 AS total_very_unhealthy_southwest,
+SUM(["Hazardous Days"]) AS total_hazardous_days_southwest,
+SUM((["Hazardous Days"]) / 48) * 100 AS percent_hazardous_southwest
+from annual_aqi_by_county_2023
+WHERE ["State"] = '"Arizona"' OR ["State"] = '"Texas"' OR ["State"] = '"New Mexico"';
+
+/* Great Plains
+North Dakota, South Dakota, Nebraska, Iowa, Kansas, Missouri, Oklahoma
+*/
+
+select
+SUM(["Good Days"]) AS total_good_days_great_plains,
+SUM((["Good Days"]) / 139401) * 100 AS total_good_days_great_plains,
+SUM(["Moderate Days"]) AS total_moderate_great_plains,
+SUM((["Moderate Days"]) / 41264) * 100 AS percent_moderate_great_plains,
+SUM(["Unhealthy for Sensitive Groups Days"]) AS total_unhealthy_sensitive_great_plains,
+SUM((["Unhealthy for Sensitive Groups Days"]) / 3361) * 100 AS percent_unhealthy_sensitive_great_plains,
+SUM(["Unhealthy Days"]) AS total_unhealthy_great_plains,
+SUM((["Unhealthy Days"]) / 790) * 100 AS percent_unhealthy_great_plains,
+SUM(["Very Unhealthy Days"]) AS total_very_unhealthy_great_plains,
+SUM((["Very Unhealthy Days"]) / 88) * 100 AS total_very_unhealthy_great_plains,
+SUM(["Hazardous Days"]) AS total_hazardous_days_great_plains,
+SUM((["Hazardous Days"]) / 48) * 100 AS percent_hazardous_great_plains
+from annual_aqi_by_county_2023
+WHERE ["State"] = '"North Dakota"' OR ["State"] = '"South Dakota"' OR ["State"] = '"Nebraska"' OR
+["State"] = '"Iowa"' OR ["State"] = '"Kansas"' OR ["State"] = '"Missouri"' OR ["State"] = '"Oklahoma"';
+
+/* Great Lakes
+Minnesota, Michigan, Wisconsin, Illinois, Ohio, Indiana
+*/
+
+select
+SUM(["Good Days"]) AS total_good_days_great_lakes,
+SUM((["Good Days"]) / 139401) * 100 AS total_good_days_great_lakes,
+SUM(["Moderate Days"]) AS total_moderate_great_lakes,
+SUM((["Moderate Days"]) / 41264) * 100 AS percent_moderate_great_lakes,
+SUM(["Unhealthy for Sensitive Groups Days"]) AS total_unhealthy_sensitive_great_lakes,
+SUM((["Unhealthy for Sensitive Groups Days"]) / 3361) * 100 AS percent_unhealthy_sensitive_great_lakes,
+SUM(["Unhealthy Days"]) AS total_unhealthy_great_lakes,
+SUM((["Unhealthy Days"]) / 790) * 100 AS percent_unhealthy_great_lakes,
+SUM(["Very Unhealthy Days"]) AS total_very_unhealthy_great_lakes,
+SUM((["Very Unhealthy Days"]) / 88) * 100 AS total_very_unhealthy_great_lakes,
+SUM(["Hazardous Days"]) AS total_hazardous_days_great_lakes,
+SUM((["Hazardous Days"]) / 48) * 100 AS percent_hazardous_great_lakes
+from annual_aqi_by_county_2023
+WHERE ["State"] = '"Minnesota"' OR ["State"] = '"Michigan"' OR ["State"] = '"Illinois"' OR
+["State"] = '"Indiana"' OR ["State"] = '"Ohio"' OR ["State"] = '"Wisconsin"';
+
+/* Mid-Atlantic
+New York, Maryland, Pennslyvania, Delaware, District of Columbia, Virginia, New Jersey
+*/
+
+select
+SUM(["Good Days"]) AS total_good_days_atlantic,
+SUM((["Good Days"]) / 139401) * 100 AS total_good_days_atlantic,
+SUM(["Moderate Days"]) AS total_moderate_atlantic,
+SUM((["Moderate Days"]) / 41264) * 100 AS percent_moderate_atlantic,
+SUM(["Unhealthy for Sensitive Groups Days"]) AS total_unhealthy_sensitive_atlantic,
+SUM((["Unhealthy for Sensitive Groups Days"]) / 3361) * 100 AS percent_unhealthy_sensitive_atlantic,
+SUM(["Unhealthy Days"]) AS total_unhealthy_atlantic,
+SUM((["Unhealthy Days"]) / 790) * 100 AS percent_unhealthy_atlantic,
+SUM(["Very Unhealthy Days"]) AS total_very_unhealthy_atlantic,
+SUM((["Very Unhealthy Days"]) / 88) * 100 AS total_very_unhealthy_atlantic,
+SUM(["Hazardous Days"]) AS total_hazardous_days_atlantic,
+SUM((["Hazardous Days"]) / 48) * 100 AS percent_hazardous_atlantic
+from annual_aqi_by_county_2023
+WHERE ["State"] = '"District of Columbia"' OR ["State"] = '"New York"' OR ["State"] = '"Maryland"' OR
+["State"] = '"Pennslyvania"' OR ["State"] = '"Delaware"' OR ["State"] = '"Virginia"' 
+OR ["State"] = '"New Jersey"';
+
+/* Appalachia 
+Arkansas, West Virginia, Tennessee, Kentucky
+*/
+
+select
+SUM(["Good Days"]) AS total_good_days_app,
+SUM((["Good Days"]) / 139401) * 100 AS total_good_days_app,
+SUM(["Moderate Days"]) AS total_moderate_app,
+SUM((["Moderate Days"]) / 41264) * 100 AS percent_moderate_app,
+SUM(["Unhealthy for Sensitive Groups Days"]) AS total_unhealthy_sensitive_app,
+SUM((["Unhealthy for Sensitive Groups Days"]) / 3361) * 100 AS percent_unhealthy_sensitive_app,
+SUM(["Unhealthy Days"]) AS total_unhealthy_app,
+SUM((["Unhealthy Days"]) / 790) * 100 AS percent_unhealthy_app,
+SUM(["Very Unhealthy Days"]) AS total_very_unhealthy_app,
+SUM((["Very Unhealthy Days"]) / 88) * 100 AS total_very_unhealthy_app,
+SUM(["Hazardous Days"]) AS total_hazardous_days_app,
+SUM((["Hazardous Days"]) / 48) * 100 AS percent_hazardous_app
+from annual_aqi_by_county_2023
+WHERE ["State"] = '"West Virginia"' OR ["State"] = '"Tennessee"' OR ["State"] = '"Arkansas"' OR
+["State"] = '"Kentucky"';
+
+/* Southeast
+Florida, North Carolina, South Carolina, Georgia, Alabama, Mississippi, Louisiana
+*/
+
+select
+SUM(["Good Days"]) AS total_good_days_se,
+SUM((["Good Days"]) / 139401) * 100 AS total_good_days_se,
+SUM(["Moderate Days"]) AS total_moderate_se,
+SUM((["Moderate Days"]) / 41264) * 100 AS percent_moderate_se,
+SUM(["Unhealthy for Sensitive Groups Days"]) AS total_unhealthy_sensitive_se,
+SUM((["Unhealthy for Sensitive Groups Days"]) / 3361) * 100 AS percent_unhealthy_sensitive_se,
+SUM(["Unhealthy Days"]) AS total_unhealthy_se,
+SUM((["Unhealthy Days"]) / 790) * 100 AS percent_unhealthy_se,
+SUM(["Very Unhealthy Days"]) AS total_very_unhealthy_se,
+SUM((["Very Unhealthy Days"]) / 88) * 100 AS total_very_unhealthy_se,
+SUM(["Hazardous Days"]) AS total_hazardous_days_se,
+SUM((["Hazardous Days"]) / 48) * 100 AS percent_hazardous_se
+from annual_aqi_by_county_2023
+WHERE ["State"] = '"Florida"' OR ["State"] = '"North Carolina"' OR ["State"] = '"South Carolina"' OR
+["State"] = '"Georgia"' OR ["State"] = '"Alabama"' OR ["State"] = '"Mississippi"' OR ["State"] = '"Louisiana"';
+
+/* New England
+Massachusetts, Connecticut, Rhode Island, Maine, New Hampshire, Vermont
+*/
+
+select
+SUM(["Good Days"]) AS total_good_days_ne,
+SUM((["Good Days"]) / 139401) * 100 AS total_good_days_ne,
+SUM(["Moderate Days"]) AS total_moderate_ne,
+SUM((["Moderate Days"]) / 41264) * 100 AS percent_moderate_ne,
+SUM(["Unhealthy for Sensitive Groups Days"]) AS total_unhealthy_sensitive_ne,
+SUM((["Unhealthy for Sensitive Groups Days"]) / 3361) * 100 AS percent_unhealthy_sensitive_ne,
+SUM(["Unhealthy Days"]) AS total_unhealthy_ne,
+SUM((["Unhealthy Days"]) / 790) * 100 AS percent_unhealthy_ne,
+SUM(["Very Unhealthy Days"]) AS total_very_unhealthy_ne,
+SUM((["Very Unhealthy Days"]) / 88) * 100 AS total_very_unhealthy_ne,
+SUM(["Hazardous Days"]) AS total_hazardous_days_ne,
+SUM((["Hazardous Days"]) / 48) * 100 AS percent_hazardous_ne
+from annual_aqi_by_county_2023
+WHERE ["State"] = '"Massachusetts"' OR ["State"] = '"Connecticut"' OR ["State"] = '"Rhode Island"' OR
+["State"] = '"Maine"' OR ["State"] = '"New Hampshire"' OR ["State"] = '"Vermont"';
