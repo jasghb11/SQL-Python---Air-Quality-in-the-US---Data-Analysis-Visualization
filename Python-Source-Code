@@ -1,0 +1,111 @@
+# Source Code for Python Data Visualizations
+
+# Total Days of Good AQI and Percentage of Good Days Nationwide
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from adjustText import adjust_text
+
+# Data
+data = pd.DataFrame({
+    'Total Days of Good Days': [16551, 15267, 9661, 11749, 22825, 15136, 9357, 24943, 7615],
+    'Percentage of Total Good Days Nationwide': [12, 11, 7, 8, 16, 11, 7, 18, 5],
+    'Region': ['West Coast', 'Mountain West', 'Southwest', 'Great Plains', 'Great Lakes', 'Mid-Atlantic', 'Appalachia', 'Southeast', 'New England']
+})
+
+# Plot
+plt.figure(figsize=(12, 8))
+palette = sns.color_palette("bright", len(data))  # Create a palette with a color for each point
+scatter = sns.scatterplot(data=data, x='Total Days of Good Days', y='Percentage of Total Good Days Nationwide', hue='Region', palette=palette, s=100)
+
+texts = []
+for line in range(0, data.shape[0]):
+    texts.append(plt.text(data['Total Days of Good Days'][line], data['Percentage of Total Good Days Nationwide'][line], ' ' + data['Region'][line], horizontalalignment='left', size='medium', color='black', weight='semibold'))
+adjust_text(texts, arrowprops=dict(arrowstyle='->', color='red'))
+
+# Customizations
+plt.xlabel('Total Days of Good Days')
+plt.ylabel('Percentage of Total Good Days Nationwide')
+plt.title('Percentages of Total Good Days of Air Quality')
+plt.grid(True)
+plt.legend(title='Region')
+plt.show()
+
+# Good Days and the Percentage of Each Region's Good Days as a Proportion of its total
+
+data = pd.DataFrame({
+    'Total Days of Good Days': [16551, 15267, 9661, 11749, 22825, 15136, 9357, 24943, 7615],
+    'Percentage of Good Days of AQI': [84, 75, 71, 68, 68, 82, 77, 77, 87],
+    'Region': ['West Coast', 'Mountain West', 'Southwest', 'Great Plains', 'Great Lakes', 'Mid-Atlantic', 'Appalachia', 'Southeast', 'New England']
+})
+
+# Plot
+plt.figure(figsize=(12, 8))
+palette = sns.color_palette("coolwarm", len(data))  # Create a palette with a color for each point
+scatter = sns.scatterplot(data=data, x='Total Days of Good Days', y='Percentage of Good Days of AQI', hue='Region', palette=palette, s=100)
+
+texts = []
+for line in range(0, data.shape[0]):
+    texts.append(plt.text(data['Total Days of Good Days'][line], data['Percentage of Good Days of AQI'][line], ' ' + data['Region'][line], horizontalalignment='left', size='medium', color='black', weight='semibold'))
+adjust_text(texts, arrowprops=dict(arrowstyle='->', color='red'))
+
+# Customizations
+plt.xlabel('Total Days of Good Days')
+plt.ylabel('Percentage of Good Days of AQI')
+plt.title('Total and Percentages of Good Days of AQI')
+plt.grid(True)
+plt.legend(title='Region')
+plt.show()
+
+# Moderate Days
+
+data = pd.DataFrame({
+    'Total Days of Moderate Days': [2889, 4723, 3704, 4957, 9042, 2873, 2693, 7327, 1041],
+    'Percentage of Moderate Days of AQI': [15, 23, 27, 29, 27, 16, 22, 23, 12],
+    'Region': ['West Coast', 'Mountain West', 'Southwest', 'Great Plains', 'Great Lakes', 'Mid-Atlantic', 'Appalachia', 'Southeast', 'New England']
+})
+
+# Plot
+plt.figure(figsize=(12, 8))
+palette = sns.color_palette("coolwarm", len(data))  # Create a palette with a color for each point
+scatter = sns.scatterplot(data=data, x='Total Days of Moderate Days', y='Percentage of Moderate Days of AQI', hue='Region', palette=palette, s=100)
+
+texts = []
+for line in range(0, data.shape[0]):
+    texts.append(plt.text(data['Total Days of Moderate Days'][line], data['Percentage of Moderate Days of AQI'][line], ' ' + data['Region'][line], horizontalalignment='left', size='medium', color='black', weight='semibold'))
+adjust_text(texts, arrowprops=dict(arrowstyle='->', color='red'))
+
+# Customizations
+plt.xlabel('Total Moderate Days')
+plt.ylabel('Percentage of Moderate Days of AQI')
+plt.title('Total and Percentages of Moderate Days of AQI')
+plt.grid(True)
+plt.legend(title='Region')
+plt.show()
+
+# Unhealthy and Unhealthy for Sensitive Groups
+
+data = pd.DataFrame({
+    'Total Unhealthy/Unhealthy for Sensitive Group AQI Days': [330, 299, 253, 596, 1528, 390, 181, 262, 107],
+    'Percentage of Days with Unhealthy/Unhealthy for Sensitive Groups AQI': [1.6, 1.5, 1.9, 3.4, 4.6, 2.1, 1.5, .8, 1.2],
+    'Region': ['West Coast', 'Mountain West', 'Southwest', 'Great Plains', 'Great Lakes', 'Mid-Atlantic', 'Appalachia', 'Southeast', 'New England']
+})
+
+# Plot
+plt.figure(figsize=(12, 8))
+palette = sns.color_palette("coolwarm", len(data))  # Create a palette with a color for each point
+scatter = sns.scatterplot(data=data, x='Total Unhealthy/Unhealthy for Sensitive Group AQI Days', y='Percentage of Days with Unhealthy/Unhealthy for Sensitive Groups AQI', hue='Region', palette=palette, s=100)
+
+texts = []
+for line in range(0, data.shape[0]):
+    texts.append(plt.text(data['Total Unhealthy/Unhealthy for Sensitive Group AQI Days'][line], data['Percentage of Days with Unhealthy/Unhealthy for Sensitive Groups AQI'][line], ' ' + data['Region'][line], horizontalalignment='left', size='medium', color='black', weight='semibold'))
+adjust_text(texts, arrowprops=dict(arrowstyle='->', color='red'))
+
+# Customizations
+plt.xlabel('Total Unhealthy/Unhealthy for Sensitive Group AQI Days')
+plt.ylabel('Percentage of Days with Unhealthy/Unhealthy for Sensitive Groups AQI')
+plt.title('Total and Percentages of Unhealthy and Unhealthy for Sensitive Groups AQI Days')
+plt.grid(True)
+plt.legend(title='Region')
+plt.show()
