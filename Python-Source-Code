@@ -109,3 +109,28 @@ plt.title('Total and Percentages of Unhealthy and Unhealthy for Sensitive Groups
 plt.grid(True)
 plt.legend(title='Region')
 plt.show()
+
+# Hazardous Air
+data = pd.DataFrame({
+    'Total Hazardous AQI Days': [15, 31, 1, 0, 0, 0, 0, 0, 0],
+    'Percentage of Hazardous Days': [.0757, .1525, .0073, 0, 0, 0, 0, 0, 0],
+    'Region': ['West Coast', 'Mountain West', 'Southwest', 'Great Plains', 'Great Lakes', 'Mid-Atlantic', 'Appalachia', 'Southeast', 'New England']
+})
+
+# Plot
+plt.figure(figsize=(12, 8))
+palette = sns.color_palette("coolwarm", len(data))  # Create a palette with a color for each point
+scatter = sns.scatterplot(data=data, x='Total Hazardous AQI Days', y='Percentage of Hazardous Days', hue='Region', palette=palette, s=100)
+
+texts = []
+for line in range(0, data.shape[0]):
+    texts.append(plt.text(data['Total Hazardous AQI Days'][line], data['Percentage of Hazardous Days'][line], ' ' + data['Region'][line], horizontalalignment='left', size='medium', color='black', weight='semibold'))
+adjust_text(texts, arrowprops=dict(arrowstyle='->', color='red'))
+
+# Customizations
+plt.xlabel('Total Hazardous AQI Days')
+plt.ylabel('Percentage of Hazardous Days')
+plt.title('Total and Percentages of Hazardous AQI Days')
+plt.grid(True)
+plt.legend(title='Region')
+plt.show()
