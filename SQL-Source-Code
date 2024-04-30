@@ -343,3 +343,88 @@ SUM((["Hazardous Days"]) / 8764) * 100 AS ne_hazardous
 from annual_aqi_by_county_2023
 WHERE ["State"] = '"Massachusetts"' OR ["State"] = '"Connecticut"' OR ["State"] = '"Rhode Island"' OR
 ["State"] = '"Maine"' OR ["State"] = '"New Hampshire"' OR ["State"] = '"Vermont"';
+
+select * from annual_aqi_by_county_2023;
+
+SELECT ["State"], ["County"], ["Good Days"]
+from annual_aqi_by_county_2023
+ORDER BY """Good Days""" ASC;
+
+SELECT ["State"], ["County"], ["Good Days"]
+from annual_aqi_by_county_2023
+ORDER BY """Good Days""" DESC;
+
+SELECT TOP 50 ["State"], ["County"], ["Good Days"]
+from annual_aqi_by_county_2023
+ORDER BY """Good Days""" DESC;
+
+SELECT ["State"], COUNT(*) AS state_50_count
+FROM (
+	SELECT TOP 50 ["State"]
+	FROM annual_aqi_by_county_2023
+	ORDER BY ["Good Days"] DESC
+) AS Top_AQI_States
+GROUP BY ["State"]
+ORDER BY state_50_count DESC;
+
+SELECT ["State"], COUNT(*) AS state_100_count
+FROM (
+	SELECT TOP 100 ["State"]
+	FROM annual_aqi_by_county_2023
+	ORDER BY ["Good Days"] DESC
+) AS Top_AQI_States
+GROUP BY ["State"]
+ORDER BY state_100_count DESC;
+
+/* This code takes the percentage of good days for a given state or county with total good days divided by total days of AQI
+*/
+
+SELECT 
+	["County"],
+	["State"],
+	["Good Days"],
+	["Days with AQI"],
+	CASE
+		WHEN ["Days with AQI"] = 0 THEN NULL
+		ELSE ((["Good Days"] / ["Days with AQI"]) * 100)
+	END AS percentage_good_days
+FROM
+	annual_aqi_by_county_2023
+ORDER BY percentage_good_days DESC;
+
+/* this selects a list of the states and counties with the highest proportion of good days of AQI
+*/
+
+SELECT ["State"], percentage_good_days
+FROM annual_aqi_by_county_2023
+ORDER BY percentage_good_days DESC;
+
+/* these snippets provide different views of counts of the number of times that a given state lands in the top X of good air
+*/
+
+SELECT ["State"], COUNT(*) AS state_100_count
+FROM (
+	SELECT TOP 100 ["State"]
+	FROM annual_aqi_by_county_2023
+	ORDER BY percentage_good_days DESC
+) AS Top_States
+GROUP BY ["State"]
+ORDER BY state_100_count DESC;
+
+SELECT ["State"], COUNT(*) AS state_200_count
+FROM (
+	SELECT TOP 200 ["State"]
+	FROM annual_aqi_by_county_2023
+	ORDER BY percentage_good_days DESC
+) AS Top_States
+GROUP BY ["State"]
+ORDER BY state_200_count DESC;
+
+SELECT ["State"], COUNT(*) AS above_90
+FROM (
+	SELECT ["State"]
+	FROM annual_aqi_by_county_2023
+	WHERE percentage_good_days > 90
+) AS Top_States
+GROUP BY ["State"]
+ORDER BY above_90 DESC;
